@@ -1,5 +1,5 @@
 <script>
-  export let weekday
+  import { store } from '../../store/store'
 </script>
 
 <style>
@@ -20,7 +20,7 @@
 </style>
 
 <div class="container">
-  {#each weekday as day}
+  {#each $store.weekday as day}
     <div class="day">{day}</div>
   {/each}
 </div>

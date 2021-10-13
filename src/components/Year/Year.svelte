@@ -1,65 +1,25 @@
 <script>
+  import { store } from '../../store/store'
   import { onMount } from 'svelte'
   import Month from '../Month/Month.svelte'
-  export let currentYear
-  $: months = [
-    {
-      name: 'January',
-      days: 30,
-    },
-    {
-      name: 'February',
-      days: 28,
-    },
-    {
-      name: 'March',
-      days: 30,
-    },
-    {
-      name: 'April',
-      days: 30,
-    },
-    {
-      name: 'May',
-      days: 30,
-    },
-    {
-      name: 'June',
-      days: 30,
-    },
-    {
-      name: 'July',
-      days: 30,
-    },
-    {
-      name: 'August',
-      days: 30,
-    },
-    {
-      name: 'September',
-      days: 30,
-    },
-    {
-      name: 'October',
-      days: 30,
-    },
-    {
-      name: 'November',
-      days: 30,
-    },
-    {
-      name: 'December',
-      days: 30,
-    },
-  ]
+  $: currentYear = $store.currentYear
+  $: months = $store.months
 
   onMount(() => {
     if (
-      (parseInt(currentYear % 400) === 0 &&
-        parseInt(currentYear % 100) !== 0) ||
-      parseInt(currentYear % 4) === 0
+      (currentYear % 400 === 0 && currentYear % 100 !== 0) ||
+      currentYear % 4 === 0
     ) {
-      months[1].days = 29
+      store.update((store) => {
+        return {
+          ...store,
+          months: store.months.filter((month) => {
+            return month.name === 'February' ? (month.days = 29) : month.days
+          }),
+        }
+      })
+
+      console.log($store)
     }
   })
 </script>
@@ -73,6 +33,19 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1vh 1vw;
+  }
+  @media (max-width: 1024px) {
+    .container {
+      width: 90%;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 830px) {
+    .container {
+      grid-template-columns: repeat(1, 1fr);
+      gap: 2vh 0;
+    }
   }
 </style>
 

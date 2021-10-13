@@ -17,7 +17,7 @@
 </style>
 
 <main>
-  <Navbar year={currentYear} />
-  <Year {currentYear} />
+  <Navbar />
+  <Year />
   <Footer />
 </main>

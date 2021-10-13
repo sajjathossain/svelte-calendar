@@ -1,5 +1,5 @@
 <script>
-  export let year
+  import { store } from '../../store/store'
 </script>
 
 <style>
@@ -18,5 +18,5 @@
 
 <div class="container">
   <div>Calendar</div>
-  <div>{year}</div>
+  <div>{$store.currentYear}</div>
 </div>

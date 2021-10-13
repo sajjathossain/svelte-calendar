@@ -5,9 +5,8 @@
   export let days
   export let isCurrentMonth
   export let monthNumber
-  let today = 0
+  $: today = 0
   $: startingDay = 0
-  const weekday = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
   onMount(() => {
     const date = new Date(new Date().getFullYear(), monthNumber, 1)
@@ -36,7 +35,6 @@
   .days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(auto, 1fr);
     gap: 5px;
   }
 
@@ -56,7 +54,7 @@
 
 <div class="month">
   <div class="month-name">{month}</div>
-  <Week {weekday} />
+  <Week />
   <div class="days">
     {#each Array(days + startingDay) as _, day}
       {#if day < startingDay}
